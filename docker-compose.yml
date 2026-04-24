@@ -1,0 +1,11 @@
+services:
+  sso-kingdee:
+    build: .
+    container_name: sso-kingdee
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+    env_file:
+      - .env

@@ -1,0 +1,10 @@
+{
+  "name": "sso-kingdee",
+  "version": "1.0.0",
+  "description": "A small gateway that bridges Authelia or custom auth to Kingdee Cloud SSO.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js"
+  }
+}
