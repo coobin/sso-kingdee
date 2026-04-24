@@ -187,17 +187,11 @@ function logEvent(level, message, details = {}) {
 }
 
 function maskText(value, keepStart = 2, keepEnd = 2) {
-  const text = String(value || "");
-  if (!text) return "";
-  if (text.length <= keepStart + keepEnd) return "*".repeat(text.length);
-  return `${text.slice(0, keepStart)}***${text.slice(-keepEnd)}`;
+  return String(value || "");
 }
 
 function maskEmail(value) {
-  const email = String(value || "");
-  if (!email.includes("@")) return maskText(email, 2, 0);
-  const [local, domain] = email.split("@");
-  return `${maskText(local, 2, 0)}@${domain}`;
+  return String(value || "");
 }
 
 function summarizeUser(user) {
@@ -223,20 +217,7 @@ function getClientIp(req) {
 
 function sanitizeUrlForLog(rawUrl) {
   const parsed = new URL(rawUrl, APP_BASE_URL);
-  const safe = new URL(parsed.origin + parsed.pathname);
-  for (const [key, value] of parsed.searchParams.entries()) {
-    const lowerKey = key.toLowerCase();
-    if (lowerKey === "ud") {
-      safe.searchParams.set("ud", `[base64:${value.length}]`);
-      continue;
-    }
-    if (lowerKey === "code" || lowerKey === "state") {
-      safe.searchParams.set(key, "[redacted]");
-      continue;
-    }
-    safe.searchParams.set(key, value);
-  }
-  return `${safe.pathname}${safe.search}`;
+  return `${parsed.pathname}${parsed.search}`;
 }
 
 function json(res, statusCode, payload) {
